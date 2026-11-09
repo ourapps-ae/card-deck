@@ -1,0 +1,134 @@
+{
+  "name": "card-deck",
+  "version": "0.3.0",
+  "title": "Card deck",
+  "description": "A standard 52-card deck, optionally several decks and jokers: create, shuffle through an injected random source, deal, burn, and read card codes on server, web, Apple and Android.",
+  "facilities": [
+    {
+      "id": "card-deck",
+      "description": "Create, shuffle, deal and burn cards; card codes, colours and names"
+    }
+  ],
+  "provides": [
+    {
+      "id": "card-deck",
+      "type": "ae/card-deck",
+      "version": "1.0.0",
+      "path": "interfaces/card-deck.json"
+    }
+  ],
+  "requires": [
+    {
+      "id": "random-source",
+      "type": "ae/random-source",
+      "version": "1.0.0",
+      "path": "interfaces/required-random-source.json"
+    }
+  ],
+  "collect": [
+    {
+      "id": "decks",
+      "type": "integer",
+      "grammar": "integer",
+      "required": false,
+      "secret": false,
+      "default": 1
+    },
+    {
+      "id": "jokers",
+      "type": "boolean",
+      "grammar": "boolean",
+      "required": false,
+      "secret": false,
+      "default": false
+    }
+  ],
+  "dependencies": [],
+  "platforms": [
+    "server",
+    "web",
+    "apple",
+    "android"
+  ],
+  "tools": {
+    "node": "26.5.0",
+    "python3": "3.12.8",
+    "swiftc": "6.4.2",
+    "kotlinc": "2.2.0",
+    "java": "26.0.1"
+  },
+  "suites": [
+    {
+      "id": "web",
+      "argv": [
+        "node",
+        "--test",
+        "tests/web.test.ts"
+      ]
+    },
+    {
+      "id": "apple",
+      "argv": [
+        "python3",
+        "tests/native.py",
+        "apple"
+      ],
+      "scope": "platform",
+      "tools": {
+        "python3": "3.12.8",
+        "swiftc": "6.4.2"
+      },
+      "fixtures": [
+        "tests/apple/main.swift",
+        "tests/fixtures/cards.json"
+      ]
+    },
+    {
+      "id": "android",
+      "argv": [
+        "python3",
+        "tests/native.py",
+        "android"
+      ],
+      "scope": "platform",
+      "tools": {
+        "python3": "3.12.8",
+        "kotlinc": "2.2.0",
+        "java": "26.0.1"
+      },
+      "fixtures": [
+        "tests/android/Main.kt",
+        "tests/fixtures/cards.json"
+      ]
+    }
+  ],
+  "text": {
+    "purpose": "Every card game needs the same data: which cards exist, how to name them, how to shuffle them fairly, and how to hand them out. This component holds that and nothing about any particular game. A card is a two-character code (rank 2-9, T, J, Q, K, A, then suit c, d, h, s; jokers are `*r` and `*b`). A `Deck` is an immutable pair of piles: cards still to deal and cards burned. `shuffleDeck` shuffles through an injected random source, so tests can replay a deal. Clients get the data side of cards (colour, suit glyph, court name, rank label) without any drawing code; faces belong to `card-graphics`.",
+    "userInputs": "The installer collects two settings. `decks` is how many 52-card packs to combine (whole number, 1 to 8; default 1). `jokers` adds two jokers per pack when true (default false).",
+    "integration": "Server code builds a deck from the settings, shuffles it with the `random-source` the recipe connects, and deals with `deal(deck, n)`. Cards come off the end of the pile, first card first. Rules components (`holdem-rules`, `poker-hand-ranking`, `poker-odds`) use `parseCard`, `rankOf` and `suitOf`. Client code uses `cardFacts` (web) or `CardCode` (Apple, Android) to decide colour, glyph and court name before handing the result to a graphics component. The required `random-source` is used through one method, `shuffle(items)`; a created fair-shuffle source (`createSource`, `seededSource`, `secureSource`, `sourceFrom`) has it, and so does any object with that method, so the component is testable without the shuffle component. `cardCodes` is the `CardCodes` object (ranks, suits, names, `rankOf`, `suitOf`, `fullDeck`) that poker-hand-ranking takes.",
+    "infrastructure": "No deployed service and no accounts; local library functions only.",
+    "verification": "`tests/web.test.ts` (required-local) checks the 52-card pack, jokers and decks counts, code parsing against `tests/fixtures/cards.json`, shuffling through an injected source, `cardCodes`, deal order and errors, burn, and a nine-player hold'em deal. `tests/native.py apple` compiles `CardCode.swift` with swiftc and checks the same fixture (run and passed on this machine). `tests/native.py android` compiles `CardCode.kt` with kotlinc and checks the same fixture; kotlinc is not installed here, so it was written but not run. `authoring/integration.test.ts` (not packaged) deals with the real fair-shuffle sibling and ranks with the real poker-hand-ranking sibling.",
+    "scenarios": "A hold'em table shuffles a single deck each hand. A game with several decks (a shoe) sets `decks` to 6. A rummy-style game sets `jokers` to true. A test fixes the deal by injecting a source that reorders the deck in a known way.",
+    "updates": "Patch updates replace the files only. Card codes and the order of `createDeck` are part of the contract: changing either is a new major version. The component keeps no data."
+  },
+  "agentInstructions": "Select this component for any game that deals playing cards. Set `decks` and `jokers` from the recipe's answers (hold'em: 1 deck, no jokers). Connect a `random-source` (fair-shuffle) to its required `random-source` port. Include the web, Apple and Android client files only when the matching client targets are selected.",
+  "developerInstructions": "Call `createShuffledDeck(settings, source)` once per round and keep the returned `Deck` in game state; every operation returns a new deck. Do not draw card faces here; use `card-graphics`. If your game has extra card values, add them in your own rules component, not in the code table here.",
+  "suitability": {
+    "format": 1,
+    "jobs": [
+      "card-deck"
+    ],
+    "profiles": [
+      {
+        "id": "any",
+        "load": {},
+        "cost": "none",
+        "regions": [
+          "any"
+        ],
+        "compliance": []
+      }
+    ],
+    "notes": "Pure library; no provider limits apply."
+  }
+}

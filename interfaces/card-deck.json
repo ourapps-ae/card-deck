@@ -1,0 +1,116 @@
+{
+  "id": "card-deck",
+  "type": "ae/card-deck",
+  "version": "1.0.0",
+  "operations": {
+    "createDeck": {
+      "arguments": [
+        "settings:{decks:integer,jokers:boolean}"
+      ],
+      "returns": "Deck {draw:Card[],burned:Card[]} (unshuffled)"
+    },
+    "createShuffledDeck": {
+      "arguments": [
+        "settings:{decks:integer,jokers:boolean}",
+        "source:Shuffler"
+      ],
+      "returns": "Deck"
+    },
+    "shuffleDeck": {
+      "arguments": [
+        "deck:Deck",
+        "source:Shuffler"
+      ],
+      "returns": "Deck (draw pile shuffled; burned cards kept)"
+    },
+    "deal": {
+      "arguments": [
+        "deck:Deck",
+        "count:number"
+      ],
+      "returns": "{cards:Card[],deck:Deck} (throws RangeError when the pile is too short)"
+    },
+    "burn": {
+      "arguments": [
+        "deck:Deck",
+        "count:number"
+      ],
+      "returns": "Deck (cards moved to burned)"
+    },
+    "remaining": {
+      "arguments": [
+        "deck:Deck"
+      ],
+      "returns": "number"
+    },
+    "validateSettings": {
+      "arguments": [
+        "settings:{decks:integer,jokers:boolean}"
+      ],
+      "returns": "settings (throws when decks is not a whole number from 1 to 8)"
+    },
+    "parseCard": {
+      "arguments": [
+        "code:unknown"
+      ],
+      "returns": "{rank:number,suit:number,joker:boolean}|null"
+    },
+    "isCard": {
+      "arguments": [
+        "x:unknown"
+      ],
+      "returns": "boolean"
+    },
+    "makeCard": {
+      "arguments": [
+        "rank:number",
+        "suit:number"
+      ],
+      "returns": "Card (rank 0 two to 12 ace; suit 0 to 3 in order c,d,h,s)"
+    },
+    "rankOf": {
+      "arguments": [
+        "card:Card"
+      ],
+      "returns": "number"
+    },
+    "suitOf": {
+      "arguments": [
+        "card:Card"
+      ],
+      "returns": "number"
+    },
+    "isRed": {
+      "arguments": [
+        "card:Card"
+      ],
+      "returns": "boolean"
+    },
+    "cardName": {
+      "arguments": [
+        "card:Card"
+      ],
+      "returns": "string"
+    },
+    "cardFacts": {
+      "arguments": [
+        "code:unknown"
+      ],
+      "returns": "{code,rank,suit,red,glyph,court,joker}|null (web, apple CardCode, android CardCode)"
+    },
+    "rankLabel": {
+      "arguments": [
+        "rank:string",
+        "letters?:Record<string,string>"
+      ],
+      "returns": "string"
+    },
+    "cardCodes": {
+      "arguments": [],
+      "returns": "CardCodes {ranks,suits,rankNames,rankPlurals,rankOf,suitOf,fullDeck} (value; the surface poker-hand-ranking reads)"
+    }
+  },
+  "types": {
+    "Shuffler": "{shuffle(items):T[]} (a created random-source)"
+  }
+}

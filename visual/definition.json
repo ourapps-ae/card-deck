@@ -1,0 +1,46 @@
+{
+  "id": "ourapps-ae.card-deck",
+  "name": "Card deck",
+  "kind": "component",
+  "status": "example",
+  "package": "ourapps-ae/card-deck",
+  "version": "0.3.0",
+  "ports": [
+    {
+      "id": "random-source",
+      "name": "Random source",
+      "direction": "input",
+      "kind": "interface",
+      "type": "ae/random-source",
+      "version": "1.0.0",
+      "required": true,
+      "cardinality": "one"
+    },
+    {
+      "id": "card-deck",
+      "name": "Card deck",
+      "direction": "output",
+      "kind": "interface",
+      "type": "ae/card-deck",
+      "version": "1.0.0"
+    }
+  ],
+  "settings": [
+    {
+      "id": "decks",
+      "name": "Decks",
+      "type": "number",
+      "required": false,
+      "secret": false,
+      "default": 1
+    },
+    {
+      "id": "jokers",
+      "name": "Jokers",
+      "type": "boolean",
+      "required": false,
+      "secret": false,
+      "default": false
+    }
+  ]
+}

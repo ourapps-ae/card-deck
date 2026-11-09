@@ -1,0 +1,22 @@
+{
+  "columns": ["code", "valid", "rankIndex", "suitIndex", "red", "court", "label", "glyphCodepoint"],
+  "rows": [
+    ["2c", true, 0, 0, false, null, "2", 9827],
+    ["9d", true, 7, 1, true, null, "9", 9830],
+    ["Th", true, 8, 2, true, null, "10", 9829],
+    ["Js", true, 9, 3, false, "jack", "J", 9824],
+    ["Qh", true, 10, 2, true, "queen", "Q", 9829],
+    ["Kd", true, 11, 1, true, "king", "K", 9830],
+    ["As", true, 12, 3, false, null, "A", 9824],
+    ["*r", true, -1, -1, true, null, "*", 9733],
+    ["*b", true, -1, -1, false, null, "*", 9733],
+    ["1c", false, 0, 0, false, null, "", 0],
+    ["Ax", false, 0, 0, false, null, "", 0],
+    ["A", false, 0, 0, false, null, "", 0],
+    ["Asd", false, 0, 0, false, null, "", 0],
+    ["*x", false, 0, 0, false, null, "", 0],
+    ["", false, 0, 0, false, null, "", 0]
+  ],
+  "frenchLetters": {"J": "V", "Q": "D", "K": "R"},
+  "frenchLabels": {"Js": "V", "Qh": "D", "Kd": "R", "Th": "10", "As": "A"}
+}

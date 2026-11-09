@@ -1,0 +1,14 @@
+{
+  "id": "random-source",
+  "type": "ae/random-source",
+  "version": "1.0.0",
+  "operations": {
+    "shuffle": {
+      "arguments": [
+        "items:readonly T[]"
+      ],
+      "returns": "T[] (a shuffled copy)"
+    }
+  },
+  "note": "The subset of ae/random-source that card-deck calls: one method, shuffle(items), on a created source (fair-shuffle createSource, seededSource, secureSource or sourceFrom all return one)."
+}

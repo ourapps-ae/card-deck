@@ -1,6 +1,6 @@
 {
   "name": "card-deck",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "title": "Card deck",
   "description": "A standard 52-card deck, optionally several decks and jokers: create, shuffle through an injected random source, deal, burn, and read card codes on server, web, Apple and Android.",
   "facilities": [

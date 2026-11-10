@@ -21,4 +21,4 @@ Reference revision: `19905b75dbea89fbfd424d67fe26c81aaed0e018`. Extraction sourc
 - `tests/web.test.ts`, `tests/apple/main.swift`, `tests/android/Main.kt`, `tests/native.py`: new. `native.py` follows `components/store-update/tests/native.py`.
 - `cardCodes` (`generated-platform`): the `CardCodes` object poker-hand-ranking takes. `authoring/integration.test.ts`: new.
 - `examples/consumer.ts`: new; a hold'em style deal using only this component and an injected shuffler.
-- `interfaces/required-random-source.json`: new; the subset of `ae/random-source` this component calls.
+- `interfaces/required-random-source.json`: a byte copy of fair-shuffle's `ae/random-source` document; card-deck calls only `RandomSource.shuffle` (the `Shuffler` schema of `interfaces/card-deck.json`).

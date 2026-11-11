@@ -1,6 +1,6 @@
 # Source mapping
 
-Reference revision: `19905b75dbea89fbfd424d67fe26c81aaed0e018`. Extraction source: `OurPoker/recipe/` (read-only).
+Reference revision: `19905b75dbea89fbfd424d67fe26c81aaed0e018`. Extraction source: the `recipe/` folder of `ourapps-ae/OurPoker`; paths below are relative to it.
 
 - `implementation/server/deck.ts` <- `server/src/cards.ts:1-27` (RANKS, SUITS, `rankOf`, `suitOf`, `makeCard`, `isCard`, `fullDeck`), `cards.ts:39-40` (RANK_NAMES, RANK_PLURALS), `server/src/contract.ts:9-10` (the `Card` type), `server/src/engine.ts:653-657` and `engine.ts:858-866` (deck created, shuffled, dealt with `deck.pop()`).
   - Kept: card code format, rank and suit order, order of `fullDeck` (as `fullPack`), dealing from the end of the pile, the name tables.
@@ -18,7 +18,7 @@ Reference revision: `19905b75dbea89fbfd424d67fe26c81aaed0e018`. Extraction sourc
   - Same generalisation as Apple; package `ae.deck`. Not compiled here (no kotlinc).
   - Left behind: Compose drawing, colours, pip layout (`card-graphics`).
 - `tests/fixtures/cards.json`: new, shared by the web, Apple and Android tests (15 rows of codes, valid or not, with expected indexes, colour, court name, label and glyph code point).
-- `tests/web.test.ts`, `tests/apple/main.swift`, `tests/android/Main.kt`, `tests/native.py`: new. `native.py` follows `components/store-update/tests/native.py`.
+- `tests/web.test.ts`, `tests/apple/main.swift`, `tests/android/Main.kt`, `tests/native.py`: new. `native.py` follows `tests/native.py` in `ourapps-ae/store-update`.
 - `cardCodes` (`generated-platform`): the `CardCodes` object poker-hand-ranking takes. `authoring/integration.test.ts`: new.
 - `examples/consumer.ts`: new; a hold'em style deal using only this component and an injected shuffler.
 - `interfaces/required-random-source.json`: a byte copy of fair-shuffle's `ae/random-source` document; card-deck calls only `RandomSource.shuffle` (the `Shuffler` schema of `interfaces/card-deck.json`).

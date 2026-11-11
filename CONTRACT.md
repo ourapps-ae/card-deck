@@ -20,7 +20,7 @@ The installer collects two settings. `decks` is how many 52-card packs to combin
 - `implementation/web/cards.ts` -> `components/card-deck/web/cards.ts`
 
 Dependencies: none.
-`tools.lock.json` pins verification tools: node 26.5.0, python3 3.12.8, swiftc 6.4.2, kotlinc 2.2.0, java 26.0.1. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
+`tools.lock.json` pins verification tools: node 26.5, python3 3.12, swiftc 6.4, kotlinc 2.2, java 26.0. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
 
 ## Provided interfaces
 - `interfaces/card-deck.json` defines `card-deck` (ae/card-deck) version 1.0.0: an OpenRPC 1.3.2 document, one method per function (a member of a created object is `<Type>.<member>`), with parameter, result and data types as JSON Schema 2020-12 (`components.schemas`) and thrown errors under `errors`.
@@ -42,9 +42,9 @@ No deployed service and no accounts; local library functions only.
 ## Verification
 `tests/web.test.ts` (required-local) checks the 52-card pack, jokers and decks counts, code parsing against `tests/fixtures/cards.json`, shuffling through an injected source, `cardCodes`, deal order and errors, burn, and a nine-player hold'em deal. `tests/native.py apple` compiles `CardCode.swift` with swiftc and checks the same fixture (run and passed on this machine). `tests/native.py android` compiles `CardCode.kt` with kotlinc and checks the same fixture; kotlinc is not installed here, so it was written but not run. `authoring/integration.test.ts` (not packaged) deals with the real fair-shuffle sibling and ranks with the real poker-hand-ranking sibling.
 
-- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5.0)
-- `python3 tests/native.py apple` (apple, platform; tools: python3 3.12.8, swiftc 6.4.2)
-- `python3 tests/native.py android` (android, platform; tools: python3 3.12.8, kotlinc 2.2.0, java 26.0.1)
+- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5)
+- `python3 tests/native.py apple` (apple, platform; tools: python3 3.12, swiftc 6.4)
+- `python3 tests/native.py android` (android, platform; tools: python3 3.12, kotlinc 2.2, java 26.0)
 
 ## Scenarios and presentation
 A hold'em table shuffles a single deck each hand. A game with several decks (a shoe) sets `decks` to 6. A rummy-style game sets `jokers` to true. A test fixes the deal by injecting a source that reorders the deck in a known way.

@@ -19,9 +19,21 @@
       "template": false
     },
     {
+      "destination": "components/card-deck/server/index.ts",
+      "executable": false,
+      "source": "implementation/server/index.ts",
+      "template": false
+    },
+    {
       "destination": "components/card-deck/web/cards.ts",
       "executable": false,
       "source": "implementation/web/cards.ts",
+      "template": false
+    },
+    {
+      "destination": "components/card-deck/web/index.ts",
+      "executable": false,
+      "source": "implementation/web/index.ts",
       "template": false
     }
   ],
@@ -32,7 +44,9 @@
       "components/card-deck/android/src/main/java/ae/deck/CardCode.kt",
       "components/card-deck/apple/Sources/CardCodes.swift",
       "components/card-deck/server/deck.ts",
-      "components/card-deck/web/cards.ts"
+      "components/card-deck/server/index.ts",
+      "components/card-deck/web/cards.ts",
+      "components/card-deck/web/index.ts"
     ]
   },
   "collect": [
@@ -111,7 +125,15 @@
     },
     {
       "executable": false,
+      "path": "implementation/server/index.ts"
+    },
+    {
+      "executable": false,
       "path": "implementation/web/cards.ts"
+    },
+    {
+      "executable": false,
+      "path": "implementation/web/index.ts"
     },
     {
       "executable": false,
